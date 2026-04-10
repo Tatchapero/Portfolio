@@ -1,0 +1,48 @@
+# Hugo build output
+
+/public/
+/resources/_gen/
+
+# Hugo cache (optional but recommended)
+
+/.hugo_build.lock
+
+# OS-specific files (Windows)
+
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS (in case collaborators use it)
+
+.DS_Store
+
+# Logs
+
+*.log
+
+# Node (if you're using PostCSS, Tailwind, etc.)
+
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files
+
+.env
+.env.local
+
+# IDE / Editor files
+
+.vscode/
+.idea/
+
+# Optional: if you use Hugo modules
+
+/go.sum
+/vendor/
+
+# Optional: ignore local config overrides
+
+config.local.*
