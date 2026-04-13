@@ -7,7 +7,15 @@ categories: ["Project"]
 
 ## Peli
 
-{{< icon "link" >}} [Peli](https://peli.tatchapero.dk/)
+Visit Peli here: {{< icon "link" >}} [Peli](https://peli.tatchapero.dk/)
+
+### Tech Stack
+
+- Java
+- Javalin
+- React
+- PostgreSQL
+- JUnit
 
 ## About
 
