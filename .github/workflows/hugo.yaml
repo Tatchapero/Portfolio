@@ -27,6 +27,14 @@ jobs:
       DIFY_API_KEY: ${{ secrets.DIFY_API_KEY }}
       DIFY_DATASET_ID: ${{ secrets.DIFY_DATASET_ID }}
     steps:
+      - name: Debug Dify endpoint
+        run: |
+          set -euo pipefail
+          echo "Testing dataset endpoint..."
+          curl --silent --show-error --fail \
+            --request GET \
+            --url "${DIFY_BASE_URL}/v1/datasets/${DIFY_DATASET_ID}" \
+            --header "Authorization: Bearer ${DIFY_API_KEY}"
       - name: Checkout
         uses: actions/checkout@v6
         with:
