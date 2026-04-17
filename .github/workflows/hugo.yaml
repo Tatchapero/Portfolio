@@ -117,7 +117,10 @@ jobs:
           echo "Uploading Hugo markdown files..."
           find content -type f -name "*.md" | sort | while IFS= read -r file; do
             # Create unique name from path
-            doc_name=$(echo "$file" | sed 's#^content/##' | sed 's#/#__#g')
+            doc_name=$(echo "$file" \
+              | sed 's#^content/##' \
+              | sed 's#/index.md$##' \
+              | sed 's#\.md$##')
 
             echo "Uploading ${file} as ${doc_name}"
 
