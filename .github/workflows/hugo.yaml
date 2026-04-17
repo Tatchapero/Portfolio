@@ -120,7 +120,8 @@ jobs:
             doc_name=$(echo "$file" \
               | sed 's#^content/##' \
               | sed 's#/index.md$##' \
-              | sed 's#\.md$##')
+              | sed 's#\.md$##' \
+              | sed 's#/#__#g')
 
             echo "Uploading ${file} as ${doc_name}"
 
@@ -128,13 +129,8 @@ jobs:
               --request POST \
               --url "${DIFY_BASE_URL}/v1/datasets/${DIFY_DATASET_ID}/document/create-by-file" \
               --header "Authorization: Bearer ${DIFY_API_KEY}" \
-              --form "file=@${file}" \
-              --form "data={
-                \"name\": \"${doc_name}\",
-                \"indexing_technique\": \"high_quality\",
-                \"doc_form\":\"text_model\",
-                \"process_rule\":{\"mode\":\"automatic\"}
-              }"
+              --form "file=@${file};filename=${doc_name}.md" \
+              --form 'data={"indexing_technique":"high_quality","doc_form":"text_model","process_rule":{"mode":"automatic"}}'
           done
       - name: Cache restore
         id: cache-restore
