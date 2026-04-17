@@ -23,6 +23,9 @@ jobs:
       HUGO_VERSION: 0.160.0
       NODE_VERSION: 24.14.1
       TZ: Europe/Oslo
+      DIFY_BASE_URL: ${{ secrets.DIFY_BASE_URL }}
+      DIFY_API_KEY: ${{ secrets.DIFY_API_KEY }}
+      DIFY_DATASET_ID: ${{ secrets.DIFY_DATASET_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
