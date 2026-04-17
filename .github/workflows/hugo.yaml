@@ -27,14 +27,6 @@ jobs:
       DIFY_API_KEY: ${{ secrets.DIFY_API_KEY }}
       DIFY_DATASET_ID: ${{ secrets.DIFY_DATASET_ID }}
     steps:
-      - name: Debug Dify endpoint
-        run: |
-          set -euo pipefail
-          echo "Testing dataset endpoint..."
-          curl --silent --show-error --fail \
-            --request GET \
-            --url "${DIFY_BASE_URL}/v1/datasets/${DIFY_DATASET_ID}" \
-            --header "Authorization: Bearer ${DIFY_API_KEY}"
       - name: Checkout
         uses: actions/checkout@v6
         with:
@@ -124,14 +116,22 @@ jobs:
 
           echo "Uploading Hugo markdown files..."
           find content -type f -name "*.md" | sort | while IFS= read -r file; do
-            echo "Uploading ${file}"
+            # Create unique name from path
+            doc_name=$(echo "$file" | sed 's#^content/##' | sed 's#/#__#g')
+
+            echo "Uploading ${file} as ${doc_name}"
 
             curl --silent --show-error --fail \
               --request POST \
               --url "${DIFY_BASE_URL}/v1/datasets/${DIFY_DATASET_ID}/document/create-by-file" \
               --header "Authorization: Bearer ${DIFY_API_KEY}" \
               --form "file=@${file}" \
-              --form 'data={"indexing_technique":"high_quality","doc_form":"text_model","doc_language":"English","process_rule":{"mode":"automatic"}}'
+              --form "data={
+                \"name\": \"${doc_name}\",
+                \"indexing_technique\": \"high_quality\",
+                \"doc_form\":\"text_model\",
+                \"process_rule\":{\"mode\":\"automatic\"}
+              }"
           done
       - name: Cache restore
         id: cache-restore
