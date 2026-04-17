@@ -69,6 +69,59 @@ jobs:
       - name: Configure Git
         run: |
           git config core.quotepath false
+      - name: Install jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+      - name: Sync Hugo markdown to Dify
+        run: |
+          set -euo pipefail
+
+          : "${DIFY_BASE_URL:?Missing DIFY_BASE_URL}"
+          : "${DIFY_API_KEY:?Missing DIFY_API_KEY}"
+          : "${DIFY_DATASET_ID:?Missing DIFY_DATASET_ID}"
+
+          echo "Deleting existing Dify documents..."
+          page=1
+
+          while :; do
+            response=$(curl --silent --show-error --fail \
+              --request GET \
+              --url "${DIFY_BASE_URL}/v1/datasets/${DIFY_DATASET_ID}/documents?page=${page}&limit=100" \
+              --header "Authorization: Bearer ${DIFY_API_KEY}")
+
+            ids=$(echo "$response" | jq -r '.data[]?.id')
+            has_more=$(echo "$response" | jq -r '.has_more // false')
+
+            if [ -n "$ids" ]; then
+              while IFS= read -r id; do
+                [ -z "$id" ] && continue
+                echo "Deleting document ${id}"
+                curl --silent --show-error --fail \
+                  --request DELETE \
+                  --url "${DIFY_BASE_URL}/v1/datasets/${DIFY_DATASET_ID}/documents/${id}" \
+                  --header "Authorization: Bearer ${DIFY_API_KEY}"
+              done <<< "$ids"
+            fi
+
+            if [ "$has_more" != "true" ]; then
+              break
+            fi
+
+            page=$((page + 1))
+          done
+
+          echo "Uploading Hugo markdown files..."
+          find content -type f -name "*.md" | sort | while IFS= read -r file; do
+            echo "Uploading ${file}"
+
+            curl --silent --show-error --fail \
+              --request POST \
+              --url "${DIFY_BASE_URL}/v1/datasets/${DIFY_DATASET_ID}/document/create-by-file" \
+              --header "Authorization: Bearer ${DIFY_API_KEY}" \
+              --form "file=@${file}" \
+              --form 'data={"indexing_technique":"high_quality","doc_form":"text_model","doc_language":"English","process_rule":{"mode":"automatic"}}'
+          done
       - name: Cache restore
         id: cache-restore
         uses: actions/cache/restore@v5
