@@ -1,8 +1,9 @@
 ---
 title: "RAG"
-summary: "Retrieval Augmented Generation. A technique used in AI to improve answers."
+summary: "RAG (Retrieval Augmented Generation) is an AI technique that improves answers by combining information retrieval from external sources with language model generation. It helps overcome limitations of standard models by providing up-to-date, accurate, and context-specific responses."
 date: 2026-04-13
-categories: ["Project"]
+categories: ["Project", "Exam"]
+tags: ["rag", "chunk", "vector", "embedding"]
 ---
 
 ## What is RAG?
@@ -145,8 +146,7 @@ Do not:
 8. Click `Publish` in top right corner and then `Publish Update`
 9. Ask the bot anything that it might be able to answer from the knowledge provided
 
-## Try it out
+## What we've learned
 
-The chatbot on this site is built using the example above.
-
-Ask it what it knows about `Thomas` 🤔
+- What is a RAG, and how does it work
+- How to create a simple chatbot

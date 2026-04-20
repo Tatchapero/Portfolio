@@ -3,6 +3,7 @@ title: "Peli"
 summary: "Peli is a platform built by four computer science students who share a passion for video games and software development. We created Peli to make it easy for gamers to stay up to date with upcoming game releases and keep track of the titles they're most excited about."
 date: 2026-04-12
 categories: ["Project"]
+tags: ["frontend", "react"]
 ---
 
 ## Peli
