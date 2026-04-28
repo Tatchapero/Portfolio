@@ -125,12 +125,33 @@ jobs:
 
             echo "Uploading ${file} as ${doc_name}"
 
-            curl --silent --show-error --fail \
-              --request POST \
-              --url "${DIFY_BASE_URL}/v1/datasets/${DIFY_DATASET_ID}/document/create-by-file" \
-              --header "Authorization: Bearer ${DIFY_API_KEY}" \
-              --form "file=@${file};filename=${doc_name}.md" \
-              --form 'data={"indexing_technique":"high_quality","doc_form":"text_model","process_rule":{"mode":"automatic"}}'
+            # Retry logic for upload
+            max_retries=3
+            retry_count=0
+            delay=1
+            while [ $retry_count -lt $max_retries ]; do
+              if curl --silent --show-error \
+                --request POST \
+                --url "${DIFY_BASE_URL}/v1/datasets/${DIFY_DATASET_ID}/document/create-by-file" \
+                --header "Authorization: Bearer ${DIFY_API_KEY}" \
+                --form "file=@${file};filename=${doc_name}.md" \
+                --form 'data={"indexing_technique":"high_quality","doc_form":"text_model","process_rule":{"mode":"automatic"}}'; then
+                break
+              else
+                echo "Upload failed for ${file}, retrying in ${delay}s (attempt $((retry_count + 1))/${max_retries})"
+                sleep $delay
+                delay=$((delay * 2))
+                retry_count=$((retry_count + 1))
+              fi
+            done
+
+            if [ $retry_count -eq $max_retries ]; then
+              echo "Failed to upload ${file} after ${max_retries} attempts"
+              exit 1
+            fi
+
+            # Delay between uploads to avoid rate limiting
+            sleep 2
           done
       - name: Cache restore
         id: cache-restore
