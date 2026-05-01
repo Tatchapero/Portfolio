@@ -1,6 +1,6 @@
 ---
 title: "LLM-API"
-summary: "Placeholder"
+summary: "In this article, I will show how to create an AI-driven application. The goal is to create an application, that can integrate with an LLM-API. We want to make an application that can take an internship report as input, and in return receive an assessment of the report as output."
 date: 2026-04-24
 categories: ["Project", "Exam"]
 tags: ["llm", "api", "java", "react", "springboot"]
