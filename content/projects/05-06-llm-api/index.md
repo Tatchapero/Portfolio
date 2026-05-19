@@ -43,7 +43,7 @@ The **User prompt** however, should contain the report, when we send it to the L
 
 To build the application, we're going to use a code agent. If you're not familiar with code agents, check out this article:
 
-{{< article link="/Portfolio/projects/code-agents/" showSummary=true compactSummary=true >}}
+{{< article link="/Portfolio/projects/04-code-agents/" showSummary=true compactSummary=true >}}
 
 **Steps:**
 
