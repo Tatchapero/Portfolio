@@ -1,6 +1,6 @@
 ---
 title: "Project proposal"
-summary: "Placeholder"
+summary: "Mr. J has expressed, that one of the biggest pain points, is having to assemble a contract from the various Trello tasks. For this, we could make an **Automatic Contract Generator**. If we can get an example of a Trello board and a contract, we should be able to make a solution, that can call the Trello API, collect the data and merge it into a contract."
 date: 2026-05-08
 categories: ["Project", "Exam"]
 tags: ["project", "proposal"]

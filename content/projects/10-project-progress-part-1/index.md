@@ -1,6 +1,6 @@
 ---
 title: "Project progress PART 1"
-summary: "Placeholder"
+summary: "Before we begin building the project, we should have a battle plan: What should we name the project, what's the core issue, etc. At the end of this article, we'll have a plan for the next steps, that we can follow up on in the next couple of articles."
 date: 2026-05-11
 categories: ["Project", "Exam"]
 tags: ["project", "progres", "part", "one"]
@@ -8,7 +8,7 @@ tags: ["project", "progres", "part", "one"]
 
 ## Pre-planning
 
-Before we begin building the project, we should have a battle plan: What should we name the project, what's the core issue, etc.
+Before we begin building the project, we should have a battle plan: What should we name the project, what's the core issue, etc. At the end of this article, we'll have a plan for the next steps, that we can follow up on in the next couple of articles.
 
 ### **Project Working Title**  
 - Automatic Contract Generator
@@ -69,4 +69,4 @@ A custom-built solution that can only retrieve data from a single Trello board.
 ### **Next Three Tasks**  
 1. A Java program that can call the Trello API  
 2. Extend the Java program to call OpenAI’s API
-3. Test the quality of the generated contracts
+3. Build a frontend
