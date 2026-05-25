@@ -1,8 +1,6 @@
 ---
 title: "Project progress PART 2"
-summary: "To re-iterate on what the next 3 steps are in the current plan, it is: 1. A Java program that can call the Trello API. 2. Extend the Java program to call OpenAI’s API. 3. Test the quality of the generated contracts
-
-And today we're going to be looking making a Java program that can call the Trello API."
+summary: "To re-iterate on what the next 3 steps are in the current plan, it is: 1. A Java program that can call the Trello API. 2. Extend the Java program to call OpenAI’s API. 3. Test the quality of the generated contracts. And today we're going to be looking making a Java program that can call the Trello API."
 date: 2026-05-18
 categories: ["Project", "Exam"]
 tags: ["project", "progres", "part", "two"]
