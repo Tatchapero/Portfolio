@@ -14,7 +14,7 @@ For this, we could make an **Automatic Contract Generator**. If we can get an ex
 
 ### Contract template
 
-We need a contract template from the customer. We can adjust the template to have mergefields such as `{{number-of-guests}}`, `{{price}}`, etc. This should make it easy to insert the data into the contract, once available. Most languages have a `.replace()` method that we can use here.
+We need a contract template from the customer. We can adjust the template to have mergefields such as `{{number-of-guests}}`, `{{price}}`, etc. This should make it easy to insert the data into the contract, once available.
 
 ### Trello API
 
@@ -24,7 +24,7 @@ We can collect the data from Trello using their REST API. With this, we should b
 
 We can send the Trello data to an LLM API endpoint, along with a template for the contract, and ask it to fill out the contract.
 
-### Architechture
+### Architecture
 
 This is how I imagine the various integrations should work together.
 
